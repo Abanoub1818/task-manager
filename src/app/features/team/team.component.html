@@ -1,0 +1,14 @@
+<div class="team">
+  <h2 class="team__title">Team Members</h2>
+  <div class="team__grid">
+    @for (user of users; track user.id) {
+      <div class="team__card">
+        <div class="team__avatar">{{ user.avatar }}</div>
+        <div class="team__info">
+          <strong>{{ user.name }}</strong>
+          <span>{{ user.email }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div
+  #colEl
+  class="task-column"
+  [class.task-column--over]="isDragOver()"
+  [class.task-column--todo]="status() === 'todo'"
+  [class.task-column--in-progress]="status() === 'in_progress'"
+  [class.task-column--done]="status() === 'done'"
+  role="region"
+  [attr.aria-label]="title() + ' column'"
+  (dragover)="onColumnDragOver($event)"
+  (dragleave)="onColumnDragLeave($event, colEl)"
+  (drop)="onDrop($event)"
+>
+  <div class="task-column__header">
+    <span class="task-column__title">{{ title() }}</span>
+    <span class="task-column__count" [attr.aria-label]="tasks().length + ' tasks'">{{
+      tasks().length
+    }}</span>
+  </div>
+
+  @if (loading()) {
+    <div class="task-column__list">
+      @for (i of [1, 2, 3]; track i) {
+        <div class="task-skeleton">
+          <p-skeleton width="30%" height="18px" styleClass="mb-3" borderRadius="4px" />
+          <p-skeleton width="85%" height="14px" styleClass="mb-2" />
+          <p-skeleton width="65%" height="12px" styleClass="mb-3" />
+          <p-skeleton width="45%" height="12px" styleClass="mb-3" />
+          <p-skeleton width="40%" height="12px" />
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="task-column__list">
+      @for (task of tasks(); track task.id; let i = $index) {
+        @if (isDragOver() && dragOverIndex() === i) {
+          <div class="task-column__drop-indicator" aria-hidden="true"></div>
+        }
+        <div
+          class="task-column__card-wrap"
+          [class.task-column__card-wrap--dragging]="isDragging(task)"
+          draggable="true"
+          (dragstart)="onDragStart(task)"
+          (dragend)="onDragEnd()"
+          (dragover)="onCardDragOver($event, i)"
+        >
+          <app-task-card
+            [task]="task"
+            (edit)="editTask.emit($event)"
+            (delete)="deleteTask.emit($event)"
+            (cancelDelete)="cancelDelete.emit()"
+          />
+        </div>
+      } @empty {
+        <p class="task-column__empty" role="status">No tasks</p>
+      }
+      @if (isDragOver() && dragOverIndex() >= tasks().length) {
+        <div class="task-column__drop-indicator" aria-hidden="true"></div>
+      }
+    </div>
+  }
+</div>

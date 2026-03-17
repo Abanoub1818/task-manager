@@ -1,0 +1,65 @@
+{
+  "name": "task-manager",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "start:api": "node server.js",
+    "dev": "npm run generate-data && concurrently \"npm run start:api\" \"npm run start\"",
+    "generate-data": "node data-fetching/generate-data.js",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{html,scss}": [
+      "prettier --write"
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.6.0",
+  "dependencies": {
+    "@angular/animations": "^21.2.4",
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "@primeng/themes": "^21.0.4",
+    "@primeuix/themes": "^2.0.3",
+    "chart.js": "^4.5.1",
+    "json-server": "^0.17.4",
+    "ng2-charts": "^10.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.1.3",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/eslint-plugin": "^21.3.0",
+    "@angular-eslint/eslint-plugin-template": "^21.3.0",
+    "@angular-eslint/template-parser": "^21.3.0",
+    "@angular/build": "^21.2.2",
+    "@angular/cli": "^21.2.2",
+    "@angular/compiler-cli": "^21.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.0.3",
+    "husky": "^9.1.7",
+    "jsdom": "^28.0.0",
+    "lint-staged": "^16.3.4",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}

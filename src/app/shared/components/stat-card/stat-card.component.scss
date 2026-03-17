@@ -1,0 +1,79 @@
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  animation: fadeUp 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__icon {
+    font-size: 16px;
+    &--stat-001 {
+      color: #1976d2;
+    }
+    &--stat-002 {
+      color: #388e3c;
+    }
+    &--stat-003 {
+      color: #0288d1;
+    }
+    &--stat-004 {
+      color: #f57c00;
+    }
+  }
+
+  &__title {
+    font-size: 13px;
+    color: #757575;
+    font-weight: 500;
+    margin: 16px 0;
+  }
+
+  &__value {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    color: #212121;
+    margin: 20px 0 16px 0;
+  }
+
+  &__change {
+    font-size: 12px;
+    font-weight: 500;
+    &--positive {
+      color: #388e3c;
+    }
+    &--negative {
+      color: #d32f2f;
+    }
+    &--neutral {
+      color: #757575;
+    }
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

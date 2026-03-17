@@ -1,0 +1,23 @@
+<div class="analytics">
+  <h2 class="analytics__title">Task Analytics</h2>
+  <div class="analytics__charts">
+    <div class="analytics__chart-card">
+      <h3>By Status</h3>
+      <canvas
+        baseChart
+        [data]="statusChartData()"
+        [type]="'doughnut'"
+        [options]="chartOptions"
+      ></canvas>
+    </div>
+    <div class="analytics__chart-card">
+      <h3>By Priority</h3>
+      <canvas
+        baseChart
+        [data]="priorityChartData()"
+        [type]="'bar'"
+        [options]="chartOptions"
+      ></canvas>
+    </div>
+  </div>
+</div>

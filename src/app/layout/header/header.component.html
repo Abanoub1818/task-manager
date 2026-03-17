@@ -1,0 +1,35 @@
+<header class="header" role="banner">
+  <div class="header__brand">
+    <i class="pi pi-th-large" aria-hidden="true"></i>
+    <span>Task Manager</span>
+  </div>
+
+  <button class="header__menu-btn" (click)="menuToggle.emit()" aria-label="Toggle navigation menu">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <div class="header__search" role="search">
+    <i class="pi pi-search header__search-icon" aria-hidden="true"></i>
+    <input
+      class="header__search-input"
+      type="search"
+      placeholder="Search tasks..."
+      [ngModel]="searchValue()"
+      (ngModelChange)="searchChange.emit($event)"
+      aria-label="Search tasks"
+    />
+  </div>
+
+  <div class="header__actions">
+    <button class="header__icon-btn" aria-label="Notifications">
+      <img
+        src="assets/icons/notification.png"
+        aria-hidden="true"
+        width="16"
+        height="16"
+        loading="lazy"
+      />
+    </button>
+    <div class="header__avatar" role="img" aria-label="User: John Doe">JD</div>
+  </div>
+</header>

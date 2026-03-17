@@ -1,0 +1,77 @@
+<form [formGroup]="form" class="tf" (ngSubmit)="submit()">
+  <div class="tf__field">
+    <label class="tf__label" for="tf-title">Title <span class="tf__req">*</span></label>
+    <input class="tf__input" id="tf-title" formControlName="title" placeholder="Task title" />
+    @if (form.get('title')?.hasError('required') && form.get('title')?.touched) {
+      <small class="tf__error">Title is required</small>
+    }
+  </div>
+
+  <div class="tf__field">
+    <label class="tf__label" for="tf-desc">Description</label>
+    <textarea
+      class="tf__input tf__textarea"
+      id="tf-desc"
+      formControlName="description"
+      rows="3"
+      placeholder="Task description"
+    ></textarea>
+  </div>
+
+  <div class="tf__row">
+    <div class="tf__field">
+      <label class="tf__label" for="tf-priority">Priority <span class="tf__req">*</span></label>
+      <select class="tf__select" id="tf-priority" formControlName="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <div class="tf__field">
+      <label class="tf__label" for="tf-status">Status <span class="tf__req">*</span></label>
+      <select class="tf__select" id="tf-status" formControlName="status">
+        <option value="todo">To Do</option>
+        <option value="in_progress">In Progress</option>
+        <option value="done">Done</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tf__row">
+    <div class="tf__field">
+      <label class="tf__label" for="tf-due">Due Date <span class="tf__req">*</span></label>
+      <input class="tf__input" id="tf-due" type="date" formControlName="dueDate" />
+      @if (form.get('dueDate')?.hasError('required') && form.get('dueDate')?.touched) {
+        <small class="tf__error">Due date is required</small>
+      }
+    </div>
+    <div class="tf__field">
+      <label class="tf__label" for="tf-assignee">Assignee <span class="tf__req">*</span></label>
+      <select class="tf__select" id="tf-assignee" formControlName="assigneeId">
+        <option value="" disabled>Select assignee</option>
+        @for (user of users; track user.id) {
+          <option [value]="user.id">{{ user.name }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="tf__field">
+    <label class="tf__label" for="tf-tags"
+      >Tags <span class="tf__hint">(comma separated)</span></label
+    >
+    <input
+      class="tf__input"
+      id="tf-tags"
+      formControlName="tags"
+      placeholder="e.g. Frontend, Backend"
+    />
+  </div>
+
+  <div class="tf__actions">
+    <button type="button" class="tf__btn tf__btn--cancel" (click)="cancel()">Cancel</button>
+    <button type="submit" class="tf__btn tf__btn--submit" [disabled]="form.invalid">
+      {{ isEdit ? 'Save Changes' : 'Create Task' }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,80 @@
+<article
+  class="task-card"
+  [class.task-card--overdue]="task().isOverdue"
+  [attr.aria-label]="task().title"
+  role="article"
+>
+  <div class="task-card__header">
+    <span
+      class="task-card__priority"
+      [ngClass]="'task-card__priority--' + task().priority"
+      [attr.aria-label]="task().priority + ' priority'"
+    >
+      {{ task().priority | uppercase }}
+    </span>
+    <div class="task-card__menu-wrap">
+      <button
+        class="task-card__menu-btn"
+        (click)="toggleMenu($event)"
+        aria-label="Task options"
+        [attr.aria-expanded]="menuOpen()"
+      >
+        <i class="pi pi-ellipsis-v" aria-hidden="true"></i>
+      </button>
+      @if (menuOpen()) {
+        <div class="task-card__dropdown" role="menu">
+          <button class="task-card__dropdown-item" role="menuitem" (click)="onEdit()">
+            <i class="pi pi-pencil" aria-hidden="true"></i> Edit
+          </button>
+          <button
+            class="task-card__dropdown-item task-card__dropdown-item--danger"
+            role="menuitem"
+            (click)="onDeleteClick($event)"
+          >
+            <i class="pi pi-trash" aria-hidden="true"></i> Delete
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <h3 class="task-card__title">{{ task().title }}</h3>
+  <p class="task-card__desc">{{ task().description }}</p>
+
+  <div class="task-card__meta">
+    @if (task().isOverdue) {
+      <span class="task-card__overdue">
+        <i class="pi pi-exclamation-triangle" aria-hidden="true"></i>
+        Overdue by {{ overdueLabel() }}
+      </span>
+    } @else if (task().status === 'done' && task().completedAt) {
+      <span class="task-card__completed">
+        <i class="pi pi-check-circle" aria-hidden="true"></i>
+        Completed {{ task().completedAt | date: 'shortDate' }}
+      </span>
+    } @else {
+      <span class="task-card__due">
+        <i class="pi pi-calendar" aria-hidden="true"></i>
+        Due in {{ dueInLabel() }}
+      </span>
+    }
+  </div>
+
+  <div class="task-card__tags" aria-label="Tags">
+    @for (tag of task().tags; track tag) {
+      <span class="task-card__tag">{{ tag }}</span>
+    }
+  </div>
+
+  <div class="task-card__footer">
+    <div
+      class="task-card__avatar"
+      [pTooltip]="task().assignee.name"
+      tooltipPosition="top"
+      aria-hidden="true"
+    >
+      {{ task().assignee.avatar }}
+    </div>
+    <span class="task-card__assignee">&#64;{{ task().assignee.name.split(' ')[0] }}</span>
+  </div>
+</article>

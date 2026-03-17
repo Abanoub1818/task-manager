@@ -1,0 +1,35 @@
+@import 'primeicons/primeicons.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #212121;
+  background: #f8f9fa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+/* PrimeNG Dialog shell */
+.p-dialog .p-dialog-header {
+  padding: 20px 24px 12px;
+}
+.p-dialog .p-dialog-content {
+  padding: 0 24px 16px;
+}

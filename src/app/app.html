@@ -1,0 +1,22 @@
+<div class="app-shell">
+  @if (sidebarOpen()) {
+    <div class="app-shell__overlay" (click)="sidebarOpen.set(false)" aria-hidden="true"></div>
+  }
+
+  <app-header
+    class="app-shell__header"
+    [searchValue]="search()"
+    (searchChange)="onSearch($event)"
+    (menuToggle)="sidebarOpen.update(v => !v)"
+  />
+
+  <app-sidebar [open]="sidebarOpen()" (newTask)="onNewTask()" (close)="sidebarOpen.set(false)" />
+
+  <div class="app-shell__main">
+    <main class="app-shell__content" role="main">
+      <router-outlet />
+    </main>
+  </div>
+</div>
+<p-toast />
+<p-confirmDialog />

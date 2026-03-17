@@ -1,0 +1,49 @@
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+
+  &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+  }
+
+  &__overlay {
+    display: none;
+    @media (max-width: 768px) {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 199;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #f8f9fa;
+    overflow: hidden;
+    min-width: 0;
+    margin-left: 220px;
+    margin-top: 60px;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+
+    @media (max-width: 600px) {
+      padding: 16px;
+    }
+  }
+}

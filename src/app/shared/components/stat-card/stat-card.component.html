@@ -1,0 +1,10 @@
+<div class="stat-card">
+  <div class="stat-card__header">
+    <i [class]="iconClass() + ' stat-card__icon stat-card__icon--' + stat().id"></i>
+    <span class="stat-card__title">{{ stat().title }}</span>
+  </div>
+  <div class="stat-card__value">{{ stat().value }}</div>
+  <div class="stat-card__change" [ngClass]="'stat-card__change--' + stat().changeType">
+    {{ stat().change }} {{ stat().changeLabel }}
+  </div>
+</div>

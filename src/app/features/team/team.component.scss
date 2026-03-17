@@ -1,0 +1,54 @@
+.team {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  &__card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #1565c0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    strong {
+      font-size: 14px;
+    }
+    span {
+      font-size: 12px;
+      color: #757575;
+    }
+  }
+}

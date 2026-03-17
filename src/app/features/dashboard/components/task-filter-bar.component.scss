@@ -1,0 +1,126 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  &__tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  &__tab {
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      color 0.15s;
+    font-family: inherit;
+
+    &:hover {
+      background: #e8e8e8;
+    }
+    &:focus-visible {
+      outline: 2px solid #1565c0;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background: #1565c0;
+      color: #fff;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__priority-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__select {
+    appearance: none;
+    padding: 7px 32px 7px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #333;
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.15s;
+    &:hover {
+      border-color: #bdbdbd;
+    }
+    &:focus {
+      border-color: #1565c0;
+    }
+  }
+
+  &__select-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 11px;
+    color: #757575;
+    pointer-events: none;
+  }
+
+  &__new-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #1565c0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      transform 0.15s;
+    font-family: inherit;
+    white-space: nowrap;
+    .pi {
+      font-size: 12px;
+    }
+    &:hover {
+      background: #1976d2;
+      transform: translateY(-1px);
+    }
+    &:focus-visible {
+      outline: 2px solid #1565c0;
+      outline-offset: 2px;
+    }
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    &__tabs {
+      justify-content: center;
+    }
+    &__right {
+      justify-content: space-between;
+    }
+  }
+}

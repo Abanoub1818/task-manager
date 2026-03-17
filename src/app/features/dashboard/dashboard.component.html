@@ -1,0 +1,59 @@
+<div class="dashboard">
+  <div class="dashboard__stats">
+    @if (statsFacade.loading()) {
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="stat-skeleton">
+          <p-skeleton width="60%" height="14px" styleClass="mb-2" />
+          <p-skeleton width="40%" height="36px" styleClass="mb-2" />
+          <p-skeleton width="50%" height="12px" />
+        </div>
+      }
+    } @else {
+      @for (stat of statsFacade.statistics(); track stat.id) {
+        <app-stat-card [stat]="stat" />
+      }
+    }
+  </div>
+
+  <app-task-filter-bar
+    [filters]="taskFacade.filters()"
+    (filtersChange)="taskFacade.setFilters($event)"
+    (newTask)="openTaskDialog()"
+  />
+
+  <div class="dashboard__board">
+    <app-task-column
+      title="TO DO"
+      status="todo"
+      [tasks]="taskFacade.tasksByStatus().todo"
+      [loading]="taskFacade.loading()"
+      (editTask)="openTaskDialog($event)"
+      (deleteTask)="taskFacade.deleteTask($event)"
+      (cancelDelete)="taskFacade.cancelDelete()"
+      (statusChange)="taskFacade.updateTaskStatus($event.id, $event.status)"
+      (reorder)="taskFacade.reorderTasksInStatus($event.status, $event.tasks)"
+    />
+    <app-task-column
+      title="IN PROGRESS"
+      status="in_progress"
+      [tasks]="taskFacade.tasksByStatus().in_progress"
+      [loading]="taskFacade.loading()"
+      (editTask)="openTaskDialog($event)"
+      (deleteTask)="taskFacade.deleteTask($event)"
+      (cancelDelete)="taskFacade.cancelDelete()"
+      (statusChange)="taskFacade.updateTaskStatus($event.id, $event.status)"
+      (reorder)="taskFacade.reorderTasksInStatus($event.status, $event.tasks)"
+    />
+    <app-task-column
+      title="DONE"
+      status="done"
+      [tasks]="taskFacade.tasksByStatus().done"
+      [loading]="taskFacade.loading()"
+      (editTask)="openTaskDialog($event)"
+      (deleteTask)="taskFacade.deleteTask($event)"
+      (cancelDelete)="taskFacade.cancelDelete()"
+      (statusChange)="taskFacade.updateTaskStatus($event.id, $event.status)"
+      (reorder)="taskFacade.reorderTasksInStatus($event.status, $event.tasks)"
+    />
+  </div>
+</div>

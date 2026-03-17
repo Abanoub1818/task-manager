@@ -1,0 +1,32 @@
+<div class="filter-bar">
+  <div class="filter-bar__tabs">
+    @for (tab of statusTabs; track tab.value) {
+      <button
+        class="filter-bar__tab"
+        [ngClass]="{ 'filter-bar__tab--active': filters().status === tab.value }"
+        (click)="onStatusChange(tab.value)"
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+
+  <div class="filter-bar__right">
+    <div class="filter-bar__priority-wrap">
+      <select
+        class="filter-bar__select"
+        [ngModel]="filters().priority"
+        (ngModelChange)="onPriorityChange($event)"
+      >
+        <option value="all">Priority</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <i class="pi pi-chevron-down filter-bar__select-icon"></i>
+    </div>
+    <button class="filter-bar__new-btn" (click)="newTask.emit()">
+      <i class="pi pi-plus"></i> New Task
+    </button>
+  </div>
+</div>
