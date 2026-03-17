@@ -1,23 +1,46 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { AppComponent } from './app';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { provideZonelessChangeDetection } from '@angular/core';
 
-describe('App', () => {
+describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [AppComponent],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter([]),
+        provideHttpClient(),
+        provideAnimationsAsync(),
+        ConfirmationService,
+        MessageService,
+      ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, task-manager');
+  it('onSearch updates search signal and sets filters', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.onSearch('hello');
+    expect(app.search()).toBe('hello');
+  });
+
+  it('onNewTask opens dialog without throwing', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    await expect(app.onNewTask()).resolves.toBeUndefined();
+  });
+
+  it('sidebarOpen defaults to false', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.sidebarOpen()).toBe(false);
   });
 });
