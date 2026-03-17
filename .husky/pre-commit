@@ -1,1 +1,2 @@
+npm test -- --watch=false
 npx lint-staged
